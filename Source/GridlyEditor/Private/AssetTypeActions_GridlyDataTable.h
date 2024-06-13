@@ -6,7 +6,11 @@
 #include "GridlyDataTable.h"
 #include "Interfaces/IHttpRequest.h"
 
+#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 2)
+class FAssetTypeActions_GridlyDataTable : public FAssetTypeActions_Base
+#else
 class FAssetTypeActions_GridlyDataTable : public FAssetTypeActions_CSVAssetBase
+#endif
 {
 public:
 	// IAssetTypeActions Implementation
@@ -15,7 +19,7 @@ public:
 	virtual UClass* GetSupportedClass() const override { return UGridlyDataTable::StaticClass(); }
 	virtual FColor GetTypeColor() const override { return FColor::Blue; }
 	virtual void GetActions(const TArray<UObject*>& InObjects, struct FToolMenuSection& Section) override;
-	virtual void OpenAssetEditor( const TArray<UObject*>& InObjects, TSharedPtr<class IToolkitHost> EditWithinLevelEditor = TSharedPtr<IToolkitHost>() ) override;
+	virtual void OpenAssetEditor(const TArray<UObject*>& InObjects, TSharedPtr<class IToolkitHost> EditWithinLevelEditor = TSharedPtr<IToolkitHost>()) override;
 	// End IAssetTypeActions
 
 private:

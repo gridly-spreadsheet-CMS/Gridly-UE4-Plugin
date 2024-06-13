@@ -1,4 +1,4 @@
-# Gridly for UE4
+# Gridly for UE
 
 Gridly is the #1 spreadsheet for multi-language content. Bring your digital assets together and localize at speed!
 
@@ -6,7 +6,7 @@ Manage your game’s data as a single source of truth and roll out continuous up
 
 ## Prerequisites
 
-- Unreal Engine 4.26.2 - 4.27.0
+- Unreal Engine 4.26.2 - 5.2.1
 
 ## Getting Started
 
@@ -14,14 +14,14 @@ Before you use Gridly, you will need to sign up for an account at https://www.gr
 
 Download the Gridly plugin itself, as well as the sample project to get you started:
 
-- [Gridly UE4 Plugin](https://github.com/gridly-spreadsheet-CMS/Gridly-UE4-Plugin)
-- [Gridly UE4 Sample Project](https://github.com/gridly-spreadsheet-CMS/Gridly-UE4-Plugin-Sample-Project)
+- [Gridly UE Plugin](https://github.com/gridly-spreadsheet-CMS/Gridly-UE4-Plugin)
+- [Gridly UE Sample Project](https://github.com/gridly-spreadsheet-CMS/Gridly-UE4-Plugin-Sample-Project) (for UE 4.27.2)
 
-The sample project is optional, but provides a working example project for reference that has a very basic user interface set up for localization in UE4.
+The sample project is optional, but provides a working example project for reference that has a very basic user interface set up for localization in UE.
 
 ### Setting up a Project for Localization
 
-Gridly plugin for UE4 leverages Unreal's built-in tools for localization. If you are not familiar with Unreal's localization pipeline, please consult [their documentation](https://docs.unrealengine.com/en-US/ProductionPipelines/Localization/Overview/index.html).
+Gridly plugin for UE leverages Unreal's built-in tools for localization. If you are not familiar with Unreal's localization pipeline, please consult [their documentation](https://docs.unrealengine.com/en-US/ProductionPipelines/Localization/Overview/index.html).
 
 This guide assumes that you are already familiar with Unreal's tools, and that you've correctly set up all the text in your project for localization using this workflow. The plugin supports both inline source strings and the use of StringTables.
 
@@ -31,19 +31,19 @@ The plugin can be installed as either an engine plugin or a project plugin.
 
 #### As a Project Plugin
 
-- Extract the contents of Gridly UE4 Plugin repository to `Plugins/Gridly` (relative to project root).
+- Extract the contents of Gridly UE Plugin repository to `Plugins/Gridly` (relative to project root).
 - Generate project files for the project and build the project to compile the required DLLs for the project plugin.
 
 #### As an Engine Plugin
 
-- Extract the contents of Gridly UE4 Plugin repository to `Engine/Plugins/Gridly` (relative to engine root).
+- Extract the contents of Gridly UE Plugin repository to `Engine/Plugins/Gridly` (relative to engine root).
 - Generate project files for the engine and build again to compile the required DLLs for the plugin.
 
 ### Enabling the Plugin
 
 To enable the plugin in your project, go to `Edit -> Plugins` and search for `Gridly`.
 
-![Enable Gridly UE4 Plugin](Documentation/EnablePlugin.png)
+![Enable Gridly UE Plugin](Documentation/EnablePlugin.png)
 
 Once enabled, restart Unreal to load the plugin.
 
@@ -91,7 +91,7 @@ After you're done translating, you can import translations for all target cultur
 
 ### Exporting Translations
 
-If you have existing translations in UE4, these can also be exported to Gridly with a single click (you usually only need to do this once).
+If you have existing translations in UE, these can also be exported to Gridly with a single click (you usually only need to do this once).
 
 ![Export all to Gridly](Documentation/ExportTranslations.png)
 
@@ -109,7 +109,7 @@ While possible, it is currently *not* recommended to use this mode in a producti
 
 ## Gridly Data Table
 
-The Gridly Data Table is a data table that can be used like a regular data table in UE4 as part of your game's logic. The extra functionality that this plugin provides is that the data can also be edited through the Gridly web app, and synchronized with UE4 both during development and even in the packaged project. To get started, right click in the asset browser to create a Gridly Data Table:
+The Gridly Data Table is a data table that can be used like a regular data table in UE as part of your game's logic. The extra functionality that this plugin provides is that the data can also be edited through the Gridly web app, and synchronized with UE both during development and even in the packaged project. To get started, right click in the asset browser to create a Gridly Data Table:
 
 ![Create Gridly Data Table](Documentation/CreateGridlyDataTable.png)
 
@@ -117,7 +117,7 @@ You need to select a Structure data type for each row (or a `USTRUCT` that inher
 
 ![Set Gridly Data Table View ID](Documentation/SetGridlyDataTableViewId.png)
 
-For the plugin to map the data correctly between Gridly and UE4, the variable names of the Structure needs to be named the exact same as the column IDs of the view you are synchronizing with. Create an empty grid on Gridly and create columns with column IDs that match your Structure variables.
+For the plugin to map the data correctly between Gridly and UE, the variable names of the Structure needs to be named the exact same as the column IDs of the view you are synchronizing with. Create an empty grid on Gridly and create columns with column IDs that match your Structure variables.
 
 ![Create Gridly Data Grid](Documentation/CreateGridlyDataGrid.png)
 
@@ -125,7 +125,7 @@ For the plugin to map the data correctly between Gridly and UE4, the variable na
 
 Currently, the Gridly Data Table supports synchronizing *Boolean*, *Integer*, *Float*, *String* and *Enum* types. 
 
-You can now import/export data from UE4 to Gridly:
+You can now import/export data from UE to Gridly:
 
 ![Import/export Gridly Data Table](Documentation/ImportExportGridlyDataTable.png)
 

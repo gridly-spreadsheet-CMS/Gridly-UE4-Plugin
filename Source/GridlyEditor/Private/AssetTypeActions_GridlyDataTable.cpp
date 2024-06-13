@@ -26,12 +26,21 @@
 class FGridlyDataTableCommands final : public TCommands<FGridlyDataTableCommands>
 {
 public:
+#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 1)
 	FGridlyDataTableCommands() :
 		TCommands<FGridlyDataTableCommands>("GridlyDataTableEditor",
 			NSLOCTEXT("Gridly", "GridlyDataTableEditor", "Gridly Data Table Editor"), NAME_None,
-			FEditorStyle::GetStyleSetName())
+			FAppStyle::GetAppStyleSetName())
 	{
 	}
+#else
+	FGridlyDataTableCommands() :
+			TCommands<FGridlyDataTableCommands>("GridlyDataTableEditor",
+				NSLOCTEXT("Gridly", "GridlyDataTableEditor", "Gridly Data Table Editor"), NAME_None,
+				FEditorStyle::GetStyleSetName())
+	{
+	}
+#endif
 
 	TSharedPtr<FUICommandInfo> ImportFromGridly;
 	TSharedPtr<FUICommandInfo> ExportToGridly;
@@ -125,7 +134,11 @@ void FAssetTypeActions_GridlyDataTable::OpenAssetEditor(const TArray<UObject*>& 
 		DataTablesListText.Indent();
 		for (UDataTable* Table : InvalidDataTables)
 		{
+#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 1)
+			const FName ResolvedRowStructName = FName(Table->GetRowStructPathName().ToString());
+#else
 			const FName ResolvedRowStructName = Table->GetRowStructName();
+#endif
 			DataTablesListText.AppendLineFormat(LOCTEXT("DataTable_MissingRowStructListEntry", "* {0} (Row Structure: {1})"),
 				FText::FromString(Table->GetName()), FText::FromName(ResolvedRowStructName));
 		}
@@ -359,9 +372,15 @@ void FAssetTypeActions_GridlyDataTable::ExportToGridly(UGridlyDataTable* DataTab
 	UGridlyDataTable* GridlyDataTable = Cast<UGridlyDataTable>(DataTable);
 	check(GridlyDataTable);
 
+#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 0)
+	TSharedPtr<FScopedSlowTask, ESPMode::ThreadSafe> ExportDataTableToGridlySlowTask = MakeShareable(new FScopedSlowTask(
+	1.f,
+	LOCTEXT("ExportGridlyDataTableSlowTask", "Exporting data table to Gridly")));
+#else
 	TSharedPtr<FScopedSlowTask, ESPMode::Fast> ExportDataTableToGridlySlowTask = MakeShareable(new FScopedSlowTask(
 		1.f,
 		LOCTEXT("ExportGridlyDataTableSlowTask", "Exporting data table to Gridly")));
+#endif
 
 	size_t TotalRequests = 0;
 	size_t StartIndex = 0;

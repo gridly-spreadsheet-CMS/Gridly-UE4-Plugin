@@ -33,12 +33,21 @@ static FName ProviderName("Gridly");
 class FGridlyLocalizationTargetEditorCommands final : public TCommands<FGridlyLocalizationTargetEditorCommands>
 {
 public:
+#if (ENGINE_MAJOR_VERSION == 5 && ENGINE_MINOR_VERSION >= 1)
 	FGridlyLocalizationTargetEditorCommands() :
-		TCommands<FGridlyLocalizationTargetEditorCommands>("GridlyLocalizationTargetEditor",
-			NSLOCTEXT("Gridly", "GridlyLocalizationTargetEditor", "Gridly Localization Target Editor"), NAME_None,
-			FEditorStyle::GetStyleSetName())
+				TCommands<FGridlyLocalizationTargetEditorCommands>("GridlyLocalizationTargetEditor",
+					NSLOCTEXT("Gridly", "GridlyLocalizationTargetEditor", "Gridly Localization Target Editor"), NAME_None,
+					FAppStyle::GetAppStyleSetName())
 	{
 	}
+#else
+	FGridlyLocalizationTargetEditorCommands() :
+			TCommands<FGridlyLocalizationTargetEditorCommands>("GridlyLocalizationTargetEditor",
+				NSLOCTEXT("Gridly", "GridlyLocalizationTargetEditor", "Gridly Localization Target Editor"), NAME_None,
+				FEditorStyle::GetStyleSetName())
+	{
+	}
+#endif
 
 	TSharedPtr<FUICommandInfo> ImportAllCulturesForTargetFromGridly;
 	TSharedPtr<FUICommandInfo> ExportNativeCultureForTargetToGridly;

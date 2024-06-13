@@ -1,2 +1,6 @@
 /Binaries
 /Intermediate
+
+# ignores for IDE
+/.idea
+/.vs
